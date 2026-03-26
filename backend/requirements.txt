@@ -1,0 +1,35 @@
+# ===========================================
+# MiroFish Backend Dependencies
+# ===========================================
+# Python 3.11+ required
+# Install: pip install -r requirements.txt
+# ===========================================
+
+# ============= Core Framework / Framework Principale =============
+flask>=3.0.0
+flask-cors>=6.0.0
+
+# ============= LLM Related / Relativo a LLM =============
+# OpenAI SDK (use OpenAI format consistently for LLM calls) / OpenAI SDK (usa in modo coerente il formato OpenAI per le chiamate LLM)
+openai>=1.0.0
+
+# ============= Zep Cloud =============
+zep-cloud==3.13.0
+
+# ============= OASIS Social Media Simulation / Simulazione Social Media OASIS =============
+# OASIS social simulation framework / framework di simulazione sociale OASIS
+camel-oasis==0.2.5
+camel-ai==0.2.78
+
+# ============= File Processing / Elaborazione File =============
+PyMuPDF>=1.24.0
+# Encoding detection (supports non-UTF-8 text files) / Rilevamento codifica (supporta file di testo non UTF-8)
+charset-normalizer>=3.0.0
+chardet>=5.0.0
+
+# ============= Utilities / Utilita =============
+# Environment variable loading / Caricamento variabili d'ambiente
+python-dotenv>=1.0.0
+
+# Data validation / Validazione dati
+pydantic>=2.0.0

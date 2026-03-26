@@ -1,0 +1,213 @@
+SCENARIO ESTESO: SONDAGGIO OPINIONE PUBBLICA - POLITICHE CLIMATICHE 2026
+
+Un importante istituto di ricerca indipendente ha condotto un mega-sondaggio nazionale su 5000 cittadini riguardante le politiche climatiche, in collaborazione con università, sindacati, imprese e organizzazioni ambientali. I risultati mostrano profonde divisioni geografiche, generazionali e economiche.
+
+=== STAKEHOLDER PRINCIPALI (ESPERTI E OPINION LEADERS) ===
+
+ACCADEMICI E RICERCATORI:
+- Dr. Elena Rossi, climatologa Università Milano: "Il cambiamento climatico accelera a ritmi preoccupanti"
+- Prof. Marco Genovese, economista Politecnico Torino: "La transizione deve includere tutti i settori"
+- Prof. Silvia Naldi, sociologa Università Sapienza: "Le generazioni hanno visioni totalmente diverse"
+- Dr. Giovanni Ferrara, biologo marino Stazione Zoologica Napoli: "Gli ecosistemi oceanici in crisi acuta"
+- Prof. Andrea Colombo, ingegnere ambientale Università Bologna: "Le tecnologie esistono, mancano investimenti"
+
+IMPRENDITORI E BUSINESS LEADERS:
+- Marco Bianchi, presidente Confindustria: "Troppi vincoli asfissiano le piccole imprese"
+- Lucia Sforza, CEO TechGreen SpA: "La sostenibilità è un vantaggio competitivo"
+- Roberto Marchi, presidente Federazione PMI: "Le PMI non hanno risorse per investimenti verdi"
+- Alessandra Gallo, founder EnergiaBio srl: "Ci servono incentivi reali, non promesse"
+- Massimo Rossi, CEO industria automobilistica: "Transizione auto elettrica troppo rapida"
+
+AMBIENTALISTI E ATTIVISTI:
+- Federica Gallo, direttrice Greenpeace Italia: "I governi non fanno abbastanza, serve drasticità"
+- Lorenzo Verdi, presidente WWF Italia: "La biodiversità crolla, è un'emergenza invisibile"
+- Francesca Innocenti, coordinatrice Fridays for Future Italia: "Vi state rubando il nostro futuro"
+- Tommaso Rossi, fondatore Extinction Rebellion Italia: "Serve disobedienza civile"
+- Chiara Monti, attivista Zero Waste: "Il cambiamento inizia dal quotidiano"
+
+POLITICI E AMMINISTRATORI:
+- Giovanni Lombardi, sindaco Bologna e capo autonomie locali: "Le città hanno risorse limitate"
+- Carla Rossi, assessore ambiente Milano: "Le soluzioni locali attraggono investimenti UE"
+- Davide Ferrari, parlamentare europeo: "L'Europa spinge 30 anni avanti"
+- Elena Moretti, presidente regione Nord Italia: "Il Nord già implementa green deal"
+- Stefano Rossi, sindaco piccolo comune Sicilia: "Rural Italy non può competere"
+
+GIORNALISTI E MEDIA:
+- Silvia Martini, redattore Repubblica: "L'opinione pubblica evolve più di quello che sembra"
+- Alessio Genovese, direttore TG principale: "Le notizie di clima non catturano audience"
+- Marco Battaglia, giornalista ambientale freelance: "I conflitti di interesse oscurano la ricerca"
+- Lucia Ferrari, podcaster eco-aware: "I giovani consapevoli cercano informazione vera"
+- Roberto Neri, editorialista La Stampa: "Le scelte climatiche sono soprattutto scelte culturali"
+
+SINDACALISTI E RAPPRESENTANTI LAVORATORI:
+- Antonio Rossi, segretario generale CGIL: "I green jobs devono proteggere i lavoratori"
+- Marco Innocenti, capo CISL ambientale: "Riqualificazione professionale fondamentale"
+- Paolo Gallo, leader USB: "La transizione colpisce i settori vulnerabili"
+- Federica Bianchi, sindacalista industria metalmeccanica: "I posti di lavoro in transizione"
+
+ATTORI ECONOMICI SPECIFICI:
+- Carlo Rossi, presidente Associazione Energy Utilities: "Le reti elettriche necessitano 100 miliardi"
+- Giovanna Ferrara, head corporate responsibility ENI: "Abbiamo roadmap di transizione"
+- Matteo Gallo, CEO startup batterie sostenibili: "Le tecnologie emergenti cambieranno il gioco"
+- Lisa Monti, agricoltrice biologica biologica: "L'agricoltura è sia causa che soluzione"
+- Riccardo Ferrari, direttore Associazione Trasporti: "La mobilità è il grande nodo"
+
+RAPPRESENTANTI DELLA SOCIETÀ CIVILE:
+- Alessandra Naldi, presidente associazione genitori: "Vogliamo un mondo vivibile per i nostri figli"
+- Giuseppe Rossi, capo comunità locale nord industriale: "Gli effetti inquinamento visibili qui"
+- Maria Gallo, infermiera e attivista sanitaria: "I costi sanitari del clima saranno enormi"
+- Flavio Innocenti, rappresentante disabili: "Le politiche green devono includere tutti"
+
+=== DATI DEL SONDAGGIO ===
+
+RISULTATI NAZIONALI PRINCIPALI:
+- 62% cittadini favorevoli investimenti verdi (Nord 78%, Sud 52%, Centro 65%)
+- 38% preoccupati per costi economici (over 65: 58%, under 25: 18%)
+- 45% ritiene governo inattivo (differenza politica: destra 72%, sinistra 22%)
+- 20% non fida delle politiche europee (Est Europa 45%, Italia 20%)
+- 55% disposto a sacrifici personali (se benefici immediati)
+
+DIVISIONI PRINCIPALI:
+- Generazionali: 80% under 30 vs 35% over 60
+- Geografiche: Nord industriale 75% vs Sud agricolo 48%
+- Economiche: Classe alta 81% vs classe media 55% vs precari 38%
+- Urbane vs rurali: Città 72% vs campagna 42%
+- Settori lavorativi: Tech/innovazione 85% vs carbone/petrolio 12%
+
+FIDUCIA NEGLI ATTORI:
+- Università 78% (più fidata)
+- Piccoli comuni 72%
+- Aziende sostenibili 68%
+- UE 55%
+- Governi nazionali 35%
+- Grande industria tradizionale 18%
+
+=== TEMI DI CONFLITTO E DIBATTITI CALDI ===
+
+1. TRANSIZIONE ENERGETICA E COSTI
+   - Nucleare vs rinnovabili (divisione netta)
+   - Chi paga (tasse vs contributi)
+   - Tempi di transizione (30 vs 50 vs 70 anni)
+
+2. COMPETITIVITÀ ECONOMICA vs AMBIENTE
+   - Delocalizzazione produttivo estero
+   - Dumping ambientale paesi competitor
+   - Vantaggio competitivo sostenibilità
+   - Sovvenzioni verdi alla grande industria
+
+3. RUOLO DELL'UE E SOVRANITÀ NAZIONALE
+   - Green Deal UE troppo ambizioso?
+   - Competenza: UE vs stati nazionali
+   - Coordinamento multilaterale effettivo?
+
+4. IMPATTO OCCUPAZIONALE
+   - Nuovi posti di lavoro vs perdite
+   - Riqualificazione professionale
+   - Protezione settori vulnerabili
+   - Redistribuzione geografica lavoro
+
+5. RESPONSABILITÀ INDIVIDUALE vs COLLETTIVA
+   - Riciclaggio e consumer behavior
+   - Sacrifici personali vs scelte di sistema
+   - Consumismo sostenibile (contraddizione?)
+   - Educazione e cultura del cambiamento
+
+6. MIGRAZIONI CLIMATICHE
+   - Profughi climatici nel Mediterraneo
+   - Responsabilità paesi ricchi
+   - Conflitti futuri sulle risorse
+
+7. FINANZA VERDE
+   - Greenwashing e truffe
+   - Speculazione sui carbon credit
+   - Chi finanzia veramente la transizione
+
+=== BACINI GEOGRAFICI ===
+
+NORD ITALIA (industriale, ricco):
+- Città: Milano, Torino, Bologna, Trento
+- Attitudine: 75% favorevole, focus innovazione
+- Impatti: Inquinamento atmosferico, effluvio industriale
+- Attori: Grandi aziende, startup tech, università ricerca
+
+CENTRO ITALIA (turismo, patrimonio):
+- Città: Roma, Firenze, Perugia
+- Attitudine: 65% favorevole, focus equilibrio
+- Impatti: Desertificazione, perdita biodiversità
+- Attori: PMI turismo, agricoltura biologica, patrimonio
+
+SUD ITALIA (agricoltura, vulnerabile):
+- Città: Napoli, Palermo, Bari, Catania
+- Attitudine: 48% favorevole, preoccupazione economica
+- Impatti: Siccità, agricoltura in crisi, migrazioni
+- Attori: Piccoli agricoltori, comuni poveri
+
+=== ORGANIZZAZIONI E ISTITUZIONI ===
+
+AMBIENTALI:
+- Greenpeace Italia, WWF Italia, Legambiente, LIPU, Italia Nostra
+- European Environment Agency, IPCC Italia
+
+ECONOMICHE:
+- Confindustria, Federazione PMI, Associazioni sindacali
+- Associazioni settoriali: banche, assicurazioni, energia, trasporti
+
+ISTITUZIONALI:
+- Ministero Transizione Ecologica, Ministero Ambiente
+- Regioni, comuni, assessorati
+- Università ricerca (150+ atenei)
+
+SOCIALI:
+- Sindacati (CGIL, CISL, UIL, USB)
+- Associazioni genitori, giovani, disabili
+- Comunità locali organizzate
+
+=== GENERAZIONI E PROFILI DEMOGRAFICI ===
+
+UNDER 25 (Nativi digitali):
+- 80% preoccupati clima
+- 60% attivisti online
+- Aspettativa di cambiamento radicale in 10 anni
+- Sfiducia nelle istituzioni (55%)
+
+25-45 (Lavoratori con famiglia):
+- 65% favorevoli ma con compromessi
+- 48% già modificano comportamenti
+- Bilanciamento famiglia-ambiente
+- Preoccupazione per carriera vs valori
+
+45-65 (Power brokers):
+- 52% favorevoli (calano con età)
+- 35% pensionati senza preoccupazione lavoro
+- Radicati in abitudini acquisite
+- Influenza su decisioni importanti
+
+OVER 65 (Legacy generation):
+- 35% favorevole
+- 55% scettici (cambiamento climatico?)
+- Preoccupazione primaria: pensioni, sanità
+- Crescente isolamento dalle decisioni
+
+=== NARRATIVA DI CONFLITTO ===
+
+Un alto dirigente della grande industria dice: "Non possiamo suicidarci economicamente"
+Una giovane attivista risponde: "Se non agiamo, non avremo economia"
+
+Un sindacalista del carbone: "Mi state togliendo il lavoro"
+Un parlamentare verde: "Vi sto dando un futuro"
+
+Un piccolo imprenditore: "Non ho 50 milioni per impianti green"
+Un ricercatore: "Le tecnologie scendono di prezzo, dipende da volontà politica"
+
+Una madre: "Che mondo lasciate ai nostri figli?"
+Un conservatore: "Voi danni danni con allarmismo che paralizza"
+
+=== INDICATORI DI TENSIONE ===
+
+- 40% sente conflitto generazionale acuto
+- 35% sente conflitto di classe sulla sostenibilità
+- 25% sente conflitto Nord/Sud esplicito
+- 30% dubbiosi sulla possibilità del "green per tutti"
+- 45% credono sia un'agenda di potenti (complottismo)
+
+Questo scenario riflette una realtà complessa di conflitti reali, non consensus finto.
