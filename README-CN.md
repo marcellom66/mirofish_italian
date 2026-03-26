@@ -22,7 +22,7 @@ Simple and universal collective intelligence engine, predict anything
 [![X](https://img.shields.io/badge/X-Follow-000000?style=flat-square&logo=x&logoColor=white)](https://x.com/mirofish_ai)
 [![Instagram](https://img.shields.io/badge/Instagram-Follow-E4405F?style=flat-square&logo=instagram&logoColor=white)](https://www.instagram.com/mirofish_ai/)
 
-[Italiano](./README.md) | **English** | [中文](./README-CN.md) |
+[Italiano](./README.md) | [English](./README-EN.md) | **中文** |
 
 </div>
 
