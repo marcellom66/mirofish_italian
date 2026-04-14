@@ -52,6 +52,8 @@ class Project:
     # Error info
     error: Optional[str] = None
 
+    business_plan_metadata: Optional[Dict[str, Any]] = None
+
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary"""
         return {
