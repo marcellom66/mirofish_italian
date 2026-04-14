@@ -58,3 +58,6 @@ backend/uploads/
 
 # Docker data / Dati Docker
 data/
+
+# Git worktrees
+.worktrees/
