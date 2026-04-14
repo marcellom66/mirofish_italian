@@ -7,13 +7,14 @@
  */
 import { reactive } from 'vue'
 
-/** @type {{ files: File[], simulationRequirement: string, isPending: boolean, templateId: string|null, templateConfig: Object|null }} */
+/** @type {{ files: File[], simulationRequirement: string, isPending: boolean, templateId: string|null, templateConfig: Object|null, business_plan_metadata: Object|null }} */
 const state = reactive({
   files: [],
   simulationRequirement: '',
   isPending: false,
   templateId: null,
-  templateConfig: null
+  templateConfig: null,
+  business_plan_metadata: null
 })
 
 /**
@@ -23,13 +24,15 @@ const state = reactive({
  * @param {string} requirement - Simulation requirement text
  * @param {string|null} [templateId=null] - Quick-test template identifier
  * @param {Object|null} [templateConfig=null] - Quick-test template configuration
+ * @param {Object|null} [businessPlanMetadata=null] - Business plan metadata for project creation
  */
-export function setPendingUpload(files, requirement, templateId = null, templateConfig = null) {
+export function setPendingUpload(files, requirement, templateId = null, templateConfig = null, businessPlanMetadata = null) {
   state.files = files
   state.simulationRequirement = requirement
   state.isPending = true
   state.templateId = templateId
   state.templateConfig = templateConfig
+  state.business_plan_metadata = businessPlanMetadata
   // Persist template data to sessionStorage for page-reload resilience
   if (templateId) {
     sessionStorage.setItem('quickTestTemplateId', templateId)
@@ -40,7 +43,7 @@ export function setPendingUpload(files, requirement, templateId = null, template
 /**
  * Retrieve the current pending upload state.
  * Falls back to sessionStorage if reactive state was lost (e.g. page reload).
- * @returns {{ files: File[], simulationRequirement: string, isPending: boolean, templateId: string|null, templateConfig: Object|null }}
+ * @returns {{ files: File[], simulationRequirement: string, isPending: boolean, templateId: string|null, templateConfig: Object|null, business_plan_metadata: Object|null }}
  */
 export function getPendingUpload() {
   const templateId = state.templateId || sessionStorage.getItem('quickTestTemplateId') || null
@@ -55,7 +58,8 @@ export function getPendingUpload() {
     simulationRequirement: state.simulationRequirement,
     isPending: state.isPending,
     templateId,
-    templateConfig
+    templateConfig,
+    business_plan_metadata: state.business_plan_metadata
   }
 }
 
@@ -68,6 +72,7 @@ export function clearPendingUpload() {
   state.isPending = false
   state.templateId = null
   state.templateConfig = null
+  state.business_plan_metadata = null
   sessionStorage.removeItem('quickTestTemplateId')
   sessionStorage.removeItem('quickTestTemplateConfig')
 }
