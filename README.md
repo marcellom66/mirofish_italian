@@ -131,6 +131,35 @@ MiroFish-main/
 
 ---
 
+## Analisi Business Plan
+
+MiroFish include una sezione dedicata all'**Analisi Business Plan**, accessibile dalla home page sotto i Quick Test. Permette di simulare scenari realistici intorno a un piano d'impresa tramite un wizard strutturato.
+
+### Come funziona
+
+1. Seleziona uno dei 4 template Business Plan dalla home page
+2. **Step 1 — Profilo Aziendale**: compila i campi strutturati:
+   - Settore, fase aziendale (Startup / Crescita / Matura / Exit)
+   - Mercato target, budget stimato, principali competitor
+   - KPI prioritari (Fatturato, Quota Mercato, Retention, CAC, NPS, EBITDA)
+   - Aree di rischio (Mercato, Finanziario, Operativo, Regolatorio, Competitivo)
+   - Stakeholder da simulare (Investitori/VC, Clienti B2B, Clienti B2C, Competitor, Dipendenti, Media)
+   - Orizzonte temporale (6 mesi / 1 anno / 3 anni / 5 anni)
+3. **Step 2 — Scenario**: revisiona e personalizza il prompt di simulazione auto-generato, allega documenti opzionali (PDF, MD, TXT)
+4. La pipeline completa (grafo → simulazione → report) viene eseguita con il contesto del business plan
+5. Il Report Agent genera sezioni focalizzate su: reazioni degli stakeholder, impatto sui KPI, valutazione dei rischi, raccomandazioni strategiche
+
+### Template disponibili
+
+| Template | Descrizione |
+|---|---|
+| 📊 **Analisi Multi-Scenario** | Simula scenari ottimistici, realistici e pessimistici del piano |
+| 📈 **Evoluzione nel Tempo** | Simula le reazioni nelle fasi di lancio, crescita e maturità |
+| 🎯 **Analisi Competitiva** | Simula le reazioni di competitor, investitori e clienti target |
+| 🏢 **Analisi Completa** | Analisi completa con matrice di rischio e raccomandazioni strategiche |
+
+---
+
 ## Casi d'Uso
 
 | Caso d'Uso | Descrizione |
@@ -142,6 +171,7 @@ MiroFish-main/
 | **Campagna marketing** | Template quick test: simulare la reazione a una campagna pubblicitaria |
 | **Valutazione prezzo** | Template quick test: testare l'accettabilità di un prezzo |
 | **Sondaggio di opinione** | Template quick test: sondaggio su un tema specifico |
+| **Analisi business plan** | Sezione dedicata: analisi multi-scenario, evoluzione, competitiva o completa |
 
 ---
 

@@ -4,6 +4,7 @@ Uses a project context mechanism with server-side persistent state.
 """
 
 import os
+import json
 import traceback
 import threading
 from flask import request, jsonify
@@ -152,6 +153,7 @@ def generate_ontology():
         simulation_requirement = request.form.get('simulation_requirement', '')
         project_name = request.form.get('project_name', 'Unnamed Project')
         additional_context = request.form.get('additional_context', '')
+        business_plan_metadata_raw = request.form.get('business_plan_metadata', None)
         
         logger.debug(f"Project name: {project_name}")
         logger.debug(f"Simulation requirement: {simulation_requirement[:100]}...")
@@ -173,6 +175,11 @@ def generate_ontology():
         # Create project
         project = ProjectManager.create_project(name=project_name)
         project.simulation_requirement = simulation_requirement
+        if business_plan_metadata_raw is not None:
+            try:
+                project.business_plan_metadata = json.loads(business_plan_metadata_raw)
+            except json.JSONDecodeError:
+                logger.warning("business_plan_metadata is not valid JSON — ignoring")
         logger.info(f"Project created: {project.project_id}")
 
         # Save files and extract text

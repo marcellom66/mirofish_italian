@@ -70,6 +70,33 @@ Click the image to watch MiroFish's deep prediction of the lost ending based on 
 
 > **Financial Prediction**, **Political News Prediction** and more examples coming soon...
 
+## 📊 Business Plan Analysis
+
+MiroFish includes a dedicated **Business Plan Analysis** section on the home page, alongside the Quick Test templates. It enables structured scenario simulation for business plans through a guided wizard.
+
+### How It Works
+
+1. Select one of the 4 Business Plan templates from the home page
+2. **Step 1 — Company Profile**: fill in structured fields:
+   - Sector, business phase (Startup / Growth / Mature / Exit)
+   - Target market, estimated budget, main competitors
+   - Priority KPIs (Revenue, Market Share, Retention, CAC, NPS, EBITDA)
+   - Risk areas (Market, Financial, Operational, Regulatory, Competitive)
+   - Stakeholders to simulate (Investors/VC, B2B Customers, B2C Customers, Competitors, Employees, Media)
+   - Forecast horizon (6 months / 1 year / 3 years / 5 years)
+3. **Step 2 — Scenario**: review and edit the auto-generated simulation prompt, optionally attach documents (PDF, MD, TXT)
+4. The full pipeline (graph → simulation → report) runs with your business plan context
+5. The Report Agent generates sections focused on: stakeholder reactions, KPI impact, risk evaluation, strategic recommendations
+
+### Available Templates
+
+| Template | Description |
+|---|---|
+| 📊 **Multi-Scenario Analysis** | Simulate optimistic, realistic and pessimistic outcomes |
+| 📈 **Evolution Over Time** | Simulate reactions across launch, growth and maturity phases |
+| 🎯 **Competitive Analysis** | Simulate competitor, investor and customer reactions |
+| 🏢 **Full Business Plan Analysis** | Comprehensive analysis with risk matrix and strategic recommendations |
+
 ## 🔄 Workflow
 
 1. **Graph Building**: Seed extraction & Individual/collective memory injection & GraphRAG construction

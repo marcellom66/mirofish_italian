@@ -446,5 +446,87 @@
     "save": "Salva",
     "delete": "Elimina",
     "close": "Chiudi"
+  },
+  "businessPlan": {
+    "sectionTitle": "Analisi Business Plan",
+    "sectionSubtitle": "Simula le reazioni di mercato, le dinamiche competitive e l'evoluzione degli scenari per il tuo business plan",
+    "modal": {
+      "step1Title": "Profilo Aziendale",
+      "step2Title": "Scenario e Documenti",
+      "next": "Avanti",
+      "back": "Indietro",
+      "launch": "Avvia",
+      "dragDrop": "Trascina o sfoglia",
+      "cancel": "Annulla",
+      "fields": {
+        "sector": "Settore",
+        "phase": "Fase Aziendale",
+        "targetMarket": "Mercato Target",
+        "budget": "Budget Stimato",
+        "competitors": "Principali Competitor (uno per riga)",
+        "kpis": "KPI Prioritari",
+        "riskAreas": "Aree di Rischio da Esplorare",
+        "stakeholders": "Stakeholder da Simulare",
+        "timeHorizon": "Orizzonte Temporale",
+        "attachFiles": "Allega Documenti (opzionale)"
+      },
+      "phases": {
+        "startup": "Startup",
+        "growth": "Crescita",
+        "mature": "Matura",
+        "exit": "Exit"
+      },
+      "horizons": {
+        "6m": "6 mesi",
+        "1y": "1 anno",
+        "3y": "3 anni",
+        "5y": "5 anni"
+      },
+      "kpiOptions": {
+        "revenue": "Fatturato",
+        "marketShare": "Quota Mercato",
+        "retention": "Retention",
+        "cac": "CAC",
+        "nps": "NPS",
+        "ebitda": "EBITDA"
+      },
+      "riskOptions": {
+        "market": "Mercato",
+        "financial": "Finanziario",
+        "operational": "Operativo",
+        "regulatory": "Regolatorio",
+        "competitive": "Competitivo"
+      },
+      "stakeholderOptions": {
+        "investors": "Investitori/VC",
+        "b2b": "Clienti B2B",
+        "b2c": "Clienti B2C",
+        "competitors": "Competitor",
+        "employees": "Dipendenti",
+        "media": "Media"
+      }
+    },
+    "templates": {
+      "business_scenario": {
+        "title": "Analisi Multi-Scenario",
+        "subtitle": "Simula scenari ottimistici, realistici e pessimistici",
+        "placeholder": "Descrivi brevemente il tuo business plan..."
+      },
+      "business_evolution": {
+        "title": "Evoluzione nel Tempo",
+        "subtitle": "Simula le reazioni nelle fasi di lancio, crescita e maturità",
+        "placeholder": "Descrivi brevemente il tuo business plan..."
+      },
+      "business_competitive": {
+        "title": "Analisi Competitiva",
+        "subtitle": "Simula le reazioni di competitor, investitori e clienti",
+        "placeholder": "Descrivi brevemente il tuo business plan..."
+      },
+      "business_full": {
+        "title": "Analisi Business Plan Completa",
+        "subtitle": "Analisi completa con matrice di rischio e raccomandazioni strategiche",
+        "placeholder": "Descrivi brevemente il tuo business plan..."
+      }
+    }
   }
 }

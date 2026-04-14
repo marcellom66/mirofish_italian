@@ -70,6 +70,30 @@
         </div>
       </section>
 
+      <!-- Business Plan Analysis Section -->
+      <section class="quick-test-section business-plan-section">
+        <div class="quick-test-header">
+          <span class="status-dot bp-dot">■</span>
+          <span class="quick-test-label">{{ $t('businessPlan.sectionTitle') }}</span>
+          <span class="quick-test-subtitle">{{ $t('businessPlan.sectionSubtitle') }}</span>
+        </div>
+        <div class="template-cards">
+          <div
+            v-for="tmpl in bpTemplates"
+            :key="tmpl.id"
+            class="template-card business-plan-card"
+            @click="selectedBPTemplate = tmpl; showBPModal = true"
+          >
+            <span class="card-icon">{{ tmpl.icon }}</span>
+            <div class="card-text">
+              <div class="card-title">{{ t(tmpl.titleKey) }}</div>
+              <div class="card-subtitle">{{ t(tmpl.subtitleKey) }}</div>
+            </div>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+      </section>
+
       <section class="dashboard-section">
         <div class="left-panel">
           <div class="panel-header">
@@ -222,6 +246,14 @@
       :template="selectedTemplate"
       @close="selectedTemplate = null"
     />
+
+    <!-- Business Plan Modal -->
+    <BusinessPlanModal
+      v-if="showBPModal && selectedBPTemplate"
+      :template="selectedBPTemplate"
+      :is-open="showBPModal"
+      @close="showBPModal = false"
+    />
   </div>
 </template>
 
@@ -245,11 +277,17 @@ import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import HistoryDatabase from '../components/HistoryDatabase.vue'
 import QuickTestModal from '../components/QuickTestModal.vue'
+import BusinessPlanModal from '../components/BusinessPlanModal.vue'
 import { QUICK_TEST_TEMPLATES } from '../config/quickTestTemplates'
 
 const { t } = useI18n()
-const templates = QUICK_TEST_TEMPLATES
+const templates = QUICK_TEST_TEMPLATES.filter(tmpl => tmpl.type !== 'business_plan')
+const bpTemplates = QUICK_TEST_TEMPLATES.filter(tmpl => tmpl.type === 'business_plan')
 const selectedTemplate = ref(null)
+
+/** State for Business Plan modal */
+const selectedBPTemplate = ref(null)
+const showBPModal = ref(false)
 
 /** Get the localized title for a quick-test template */
 const getTemplateTitle = (tmpl) => t(tmpl.titleKey)
@@ -1016,6 +1054,28 @@ const startSimulation = () => {
 
 .template-card:hover .card-arrow {
   color: var(--orange);
+}
+
+/* Business Plan Section */
+.business-plan-section {
+  border-top: 1px solid var(--border);
+  margin-top: 0;
+}
+
+.bp-dot {
+  color: #10b981;
+}
+
+.business-plan-card {
+  border-left: 3px solid #10b981;
+}
+
+.business-plan-card:hover {
+  border-color: #10b981;
+}
+
+.business-plan-card:hover .card-arrow {
+  color: #10b981;
 }
 
 /* Responsive */

@@ -211,7 +211,10 @@ const handleNewProject = async () => {
     const formData = new FormData()
     pending.files.forEach(f => formData.append('files', f))
     formData.append('simulation_requirement', pending.simulationRequirement)
-    
+    if (pending.business_plan_metadata) {
+      formData.append('business_plan_metadata', JSON.stringify(pending.business_plan_metadata))
+    }
+
     const res = await generateOntology(formData)
     if (res.success) {
       clearPendingUpload()
