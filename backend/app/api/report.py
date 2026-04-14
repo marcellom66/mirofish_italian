@@ -151,7 +151,8 @@ def generate_report():
                     graph_id=graph_id,
                     simulation_id=simulation_id,
                     simulation_requirement=simulation_requirement,
-                    preferred_language=report_language
+                    preferred_language=report_language,
+                    business_plan_metadata=project.business_plan_metadata
                 )
                 
                 # Progress callback
@@ -561,7 +562,8 @@ def chat_with_report_agent():
             graph_id=graph_id,
             simulation_id=simulation_id,
             simulation_requirement=simulation_requirement,
-            preferred_language=report_language
+            preferred_language=report_language,
+            business_plan_metadata=project.business_plan_metadata
         )
         
         result = agent.chat(message=message, chat_history=chat_history)

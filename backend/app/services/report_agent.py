@@ -616,7 +616,7 @@ You are an expert in writing "Future Prediction Reports", currently writing a se
 
 Report title: {report_title}
 Report summary: {report_summary}
-Prediction scenario (simulation requirement): {simulation_requirement}
+Prediction scenario (simulation requirement): {simulation_requirement}{business_plan_context}
 
 Current section to write: {section_title}
 
@@ -903,13 +903,14 @@ class ReportAgent:
     }
     
     def __init__(
-        self, 
+        self,
         graph_id: str,
         simulation_id: str,
         simulation_requirement: str,
         preferred_language: str = "en",
         llm_client: Optional[LLMClient] = None,
-        zep_tools: Optional[ZepToolsService] = None
+        zep_tools: Optional[ZepToolsService] = None,
+        business_plan_metadata: Optional[Dict[str, Any]] = None
     ):
         """
         Initialize Report Agent
@@ -920,11 +921,14 @@ class ReportAgent:
             simulation_requirement: Simulation requirement description
             llm_client: LLM client (optional)
             zep_tools: Zep tools service (optional)
+            business_plan_metadata: Optional business plan metadata dict (sector, phase,
+                time_horizon, kpis, risk_areas, stakeholders)
         """
         self.graph_id = graph_id
         self.simulation_id = simulation_id
         self.simulation_requirement = simulation_requirement
         self.preferred_language = self._normalize_report_language(preferred_language)
+        self.business_plan_metadata = business_plan_metadata
         
         self.llm = llm_client or LLMClient()
         self.zep_tools = zep_tools or ZepToolsService()
@@ -1421,10 +1425,28 @@ class ReportAgent:
         if self.report_logger:
             self.report_logger.log_section_start(section.title, section_index)
         
+        if self.business_plan_metadata:
+            metadata = self.business_plan_metadata
+            business_plan_context = (
+                "\n\nBUSINESS PLAN CONTEXT:"
+                f"\n- Sector: {metadata.get('sector', 'N/A')}, Phase: {metadata.get('phase', 'N/A')}, Horizon: {metadata.get('time_horizon', 'N/A')}"
+                f"\n- Priority KPIs: {', '.join(metadata.get('kpis', []))}"
+                f"\n- Risk areas to analyze: {', '.join(metadata.get('risk_areas', []))}"
+                f"\n- Stakeholder types simulated: {', '.join(metadata.get('stakeholders', []))}"
+                "\n\nStructure each report section to include:"
+                "\n1. Stakeholder reaction analysis"
+                "\n2. KPI impact assessment"
+                "\n3. Risk evaluation for the specified areas"
+                "\n4. Strategic recommendations"
+            )
+        else:
+            business_plan_context = ""
+
         system_prompt = SECTION_SYSTEM_PROMPT_TEMPLATE.format(
             report_title=outline.title,
             report_summary=outline.summary,
             simulation_requirement=self.simulation_requirement,
+            business_plan_context=business_plan_context,
             section_title=section.title,
             report_language_instruction=self._report_language_instruction(),
             section_style_instruction=self._section_style_instruction(section.title, section_index),
