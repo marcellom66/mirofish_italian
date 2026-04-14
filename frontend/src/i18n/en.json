@@ -456,6 +456,8 @@
       "next": "Next",
       "back": "Back",
       "launch": "Launch",
+      "dragDrop": "Drag & drop or browse",
+      "cancel": "Cancel",
       "fields": {
         "sector": "Sector",
         "phase": "Business Phase",

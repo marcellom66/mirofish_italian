@@ -456,6 +456,8 @@
       "next": "Avanti",
       "back": "Indietro",
       "launch": "Avvia",
+      "dragDrop": "Trascina o sfoglia",
+      "cancel": "Annulla",
       "fields": {
         "sector": "Settore",
         "phase": "Fase Aziendale",
