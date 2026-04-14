@@ -155,7 +155,7 @@
             />
             <div v-if="attachedFiles.length === 0" class="upload-placeholder">
               <span class="upload-icon-arrow">&uarr;</span>
-              <span>{{ $t('quickTest.modal.dragDropBrowse') }}</span>
+              <span>{{ t('businessPlan.modal.dragDrop') }}</span>
             </div>
             <div v-else class="file-list">
               <div v-for="(file, i) in attachedFiles" :key="i" class="file-item">
@@ -168,7 +168,7 @@
       </div>
 
       <div class="modal-footer">
-        <button class="cancel-btn" @click="$emit('close')">{{ $t('quickTest.modal.cancel') }}</button>
+        <button class="cancel-btn" @click="$emit('close')">{{ t('businessPlan.modal.cancel') }}</button>
         <div class="footer-actions">
           <button v-if="currentStep === 2" class="back-btn" @click="currentStep = 1">
             {{ t('businessPlan.modal.back') }}
@@ -290,7 +290,7 @@ watch(
   () => {
     scenarioText.value = props.template.promptTemplate(buildComputedMetadata())
   },
-  { deep: true }
+  { deep: true, immediate: true }
 )
 
 /** Reset state when modal is closed or template changes */
@@ -340,7 +340,9 @@ const launch = () => {
   setPendingUpload(allFiles, simulationRequirement, props.template.id, props.template, computedMetadata)
 
   emit('close')
-  router.push({ name: 'Process', params: { projectId: 'new' } })
+  router.push({ name: 'Process', params: { projectId: 'new' } }).catch(() => {
+    isLoading.value = false
+  })
 }
 </script>
 
