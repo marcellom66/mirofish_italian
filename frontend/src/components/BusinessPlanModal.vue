@@ -266,7 +266,13 @@ const buildComputedMetadata = () => ({
   stakeholders: metadata.stakeholders.join(', ')
 })
 
-/** Reset all state back to initial values */
+/**
+ * Reset all state back to initial values.
+ * NOTE: isLoading is reset here (not in launch()) because on successful navigation
+ * the modal is hidden via showBPModal = false (Home.vue @close handler), which
+ * triggers the isOpen watcher → resetState(). The .catch() in launch() covers
+ * the failure path where navigation doesn't happen and the modal stays open.
+ */
 const resetState = () => {
   currentStep.value = 1
   metadata.sector = ''

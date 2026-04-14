@@ -38,6 +38,9 @@ export function setPendingUpload(files, requirement, templateId = null, template
     sessionStorage.setItem('quickTestTemplateId', templateId)
     sessionStorage.setItem('quickTestTemplateConfig', JSON.stringify(templateConfig))
   }
+  if (businessPlanMetadata) {
+    sessionStorage.setItem('businessPlanMetadata', JSON.stringify(businessPlanMetadata))
+  }
 }
 
 /**
@@ -53,13 +56,20 @@ export function getPendingUpload() {
       templateConfig = JSON.parse(sessionStorage.getItem('quickTestTemplateConfig'))
     } catch { templateConfig = null }
   }
+  let businessPlanMetadata = state.business_plan_metadata
+  if (!businessPlanMetadata) {
+    try {
+      const stored = sessionStorage.getItem('businessPlanMetadata')
+      businessPlanMetadata = stored ? JSON.parse(stored) : null
+    } catch { businessPlanMetadata = null }
+  }
   return {
     files: state.files,
     simulationRequirement: state.simulationRequirement,
     isPending: state.isPending,
     templateId,
     templateConfig,
-    business_plan_metadata: state.business_plan_metadata
+    business_plan_metadata: businessPlanMetadata
   }
 }
 
@@ -75,6 +85,7 @@ export function clearPendingUpload() {
   state.business_plan_metadata = null
   sessionStorage.removeItem('quickTestTemplateId')
   sessionStorage.removeItem('quickTestTemplateConfig')
+  sessionStorage.removeItem('businessPlanMetadata')
 }
 
 export default state
