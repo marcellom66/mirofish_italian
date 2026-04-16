@@ -18,6 +18,32 @@
 
       <!-- Step 1: Company Profile -->
       <div v-if="currentStep === 1" class="modal-body">
+        <!-- Excel Import Section -->
+        <div class="excel-import-section">
+          <input
+            ref="excelFileInput"
+            type="file"
+            accept=".xlsx,.xls"
+            @change="handleExcelImport"
+            style="display: none"
+          />
+          <button class="excel-import-btn" @click="$refs.excelFileInput.click()">
+            <span class="excel-icon">&#128202;</span>
+            {{ t('businessPlan.modal.importExcel') }}
+          </button>
+          <span v-if="importStatus" class="import-status" :class="importStatusType">{{ importStatus }}</span>
+        </div>
+
+        <div class="field-group">
+          <label class="input-label">{{ t('businessPlan.modal.fields.companyName') }}</label>
+          <input
+            v-model="metadata.company_name"
+            type="text"
+            class="modal-input"
+            :placeholder="t('businessPlan.modal.fields.companyName')"
+          />
+        </div>
+
         <div class="field-group">
           <label class="input-label">{{ t('businessPlan.modal.fields.sector') }}</label>
           <input
@@ -219,6 +245,7 @@ import { ref, reactive, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { setPendingUpload } from '../store/pendingUpload'
+import * as XLSX from 'xlsx'
 
 const props = defineProps({
   template: { type: Object, required: true },
@@ -233,6 +260,7 @@ const currentStep = ref(1)
 
 /** Company profile metadata collected in step 1 */
 const metadata = reactive({
+  company_name: '',
   sector: '',
   phase: 'startup',
   target_market: '',
@@ -241,7 +269,9 @@ const metadata = reactive({
   kpis: [],
   risk_areas: [],
   stakeholders: [],
-  time_horizon: '1y'
+  time_horizon: '1y',
+  /** Narrative text built from the Node Relationships sheet — injected into the seed file */
+  node_relationships_text: ''
 })
 
 /** Editable scenario prompt, auto-populated from template.promptTemplate(metadata) */
@@ -255,6 +285,140 @@ const isDragOver = ref(false)
 
 /** Whether the launch is in progress */
 const isLoading = ref(false)
+
+/** Excel import status message */
+const importStatus = ref('')
+
+/** Excel import status type (success/error) */
+const importStatusType = ref('')
+
+/** Reference to the hidden Excel file input */
+const excelFileInput = ref(null)
+
+/**
+ * Handle Excel file import: parse and populate metadata fields.
+ * Expected sheet: "Company Profile" with columns Campo | Valore
+ */
+const handleExcelImport = (e) => {
+  const file = e.target.files?.[0]
+  if (!file) return
+
+  const reader = new FileReader()
+  reader.onload = (evt) => {
+    try {
+      const data = new Uint8Array(evt.target.result)
+      const workbook = XLSX.read(data, { type: 'array' })
+
+      // Find the Company Profile sheet (case-insensitive)
+      const sheetName = workbook.SheetNames.find(
+        n => n.toLowerCase().includes('company') || n.toLowerCase().includes('profil')
+      )
+      if (!sheetName) {
+        importStatus.value = t('businessPlan.modal.importExcelMissingSheet')
+        importStatusType.value = 'error'
+        return
+      }
+
+      const rows = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName], { header: 1 })
+      // Skip header row, build key-value map
+      const kv = {}
+      for (let i = 1; i < rows.length; i++) {
+        const [key, val] = rows[i]
+        if (key && val !== undefined && val !== null) {
+          kv[String(key).trim().toLowerCase()] = String(val).trim()
+        }
+      }
+
+      // Map to metadata fields
+      if (kv.company_name) metadata.company_name = kv.company_name
+      if (kv.sector) metadata.sector = kv.sector
+      if (kv.phase) {
+        const p = kv.phase.toLowerCase()
+        if (['startup', 'growth', 'mature', 'exit'].includes(p)) metadata.phase = p
+      }
+      if (kv.target_market) metadata.target_market = kv.target_market
+      if (kv.budget) metadata.budget = kv.budget
+      if (kv.competitors) metadata.competitors = kv.competitors
+      if (kv.time_horizon) {
+        const h = kv.time_horizon.toLowerCase()
+        if (['6m', '1y', '3y', '5y'].includes(h)) metadata.time_horizon = h
+      }
+
+      // Array fields: split by comma or newline
+      const parseArray = (raw) =>
+        raw.split(/[,;\n]+/).map(s => s.trim().toLowerCase()).filter(Boolean)
+
+      if (kv.kpis) metadata.kpis = parseArray(kv.kpis)
+      if (kv.risk_areas) metadata.risk_areas = parseArray(kv.risk_areas)
+      if (kv.stakeholders) metadata.stakeholders = parseArray(kv.stakeholders)
+
+      // Try to incorporate Financial Data sheet into budget context
+      try {
+        const finSheetName = workbook.SheetNames.find(
+          n => n.toLowerCase().includes('financial') || n.toLowerCase().includes('finanz')
+        )
+        if (finSheetName) {
+          const finRows = XLSX.utils.sheet_to_json(workbook.Sheets[finSheetName], { header: 1 })
+          const finKv = {}
+          for (let i = 1; i < finRows.length; i++) {
+            const [key, val, unit] = finRows[i]
+            if (key && val !== undefined) {
+              finKv[String(key).trim().toLowerCase()] = `${val}${unit ? ' ' + unit : ''}`
+            }
+          }
+          // Append financial context to budget
+          if (finKv['ricavi annuali'] || finKv['revenue']) {
+            const rev = finKv['ricavi annuali'] || finKv['revenue']
+            metadata.budget = metadata.budget
+              ? `${metadata.budget} (Ricavi: ${rev})`
+              : `Ricavi: ${rev}`
+          }
+          if (finKv['margine operativo'] || finKv['margin']) {
+            const m = finKv['margine operativo'] || finKv['margin']
+            metadata.budget = `${metadata.budget} (Margine: ${m})`
+          }
+        }
+      } catch {
+        // Financial sheet is optional, ignore errors
+      }
+
+      // Parse Node Relationships sheet and build narrative text for graph building
+      try {
+        const relSheetName = workbook.SheetNames.find(
+          n => n.toLowerCase().includes('relationship') || n.toLowerCase().includes('relat')
+        )
+        if (relSheetName) {
+          const relRows = XLSX.utils.sheet_to_json(workbook.Sheets[relSheetName], { header: 1 })
+          // relRows[0] = headers: [Source, SourceType, Relationship, Target, TargetType, Description]
+          // relRows[1..] = data rows
+          const lines = []
+          for (let i = 1; i < relRows.length; i++) {
+            const [source, , relationship, target, , description] = relRows[i]
+            if (source && relationship && target && description) {
+              lines.push(`- ${description} [${source} ${relationship} ${target}]`)
+            }
+          }
+          if (lines.length > 0) {
+            metadata.node_relationships_text =
+              'KEY ACTOR RELATIONSHIPS:\n' + lines.join('\n')
+          }
+        }
+      } catch {
+        // Node Relationships sheet is optional, ignore errors
+      }
+
+      importStatus.value = t('businessPlan.modal.importExcelSuccess')
+      importStatusType.value = 'success'
+      setTimeout(() => { importStatus.value = '' }, 3000)
+    } catch (err) {
+      importStatus.value = t('businessPlan.modal.importExcelError')
+      importStatusType.value = 'error'
+    }
+  }
+  reader.readAsArrayBuffer(file)
+  // Reset input so same file can be re-imported
+  e.target.value = ''
+}
 
 /** Build a metadata object suitable for promptTemplate, converting raw fields */
 const buildComputedMetadata = () => ({
@@ -275,6 +439,7 @@ const buildComputedMetadata = () => ({
  */
 const resetState = () => {
   currentStep.value = 1
+  metadata.company_name = ''
   metadata.sector = ''
   metadata.phase = 'startup'
   metadata.target_market = ''
@@ -284,10 +449,13 @@ const resetState = () => {
   metadata.risk_areas = []
   metadata.stakeholders = []
   metadata.time_horizon = '1y'
+  metadata.node_relationships_text = ''
   scenarioText.value = ''
   attachedFiles.value = []
   isDragOver.value = false
   isLoading.value = false
+  importStatus.value = ''
+  importStatusType.value = ''
 }
 
 /** Auto-update scenarioText when metadata changes (deep watch) */
@@ -339,7 +507,14 @@ const launch = () => {
   const computedMetadata = buildComputedMetadata()
   const simulationRequirement = scenarioText.value
 
-  const seedText = props.template.seedPrefix + scenarioText.value
+  const prefix = typeof props.template.seedPrefix === 'function'
+    ? props.template.seedPrefix(computedMetadata)
+    : props.template.seedPrefix
+  let seedText = prefix + scenarioText.value
+  // Append node relationship narrative so Zep can extract graph edges
+  if (metadata.node_relationships_text) {
+    seedText += '\n\n' + metadata.node_relationships_text
+  }
   const seedFile = new File([seedText], 'business_plan_seed.txt', { type: 'text/plain' })
   const allFiles = [seedFile, ...attachedFiles.value]
 
@@ -439,6 +614,56 @@ const launch = () => {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+/* Excel import section */
+.excel-import-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #f0fdf8;
+  border: 1px dashed #10b981;
+  border-radius: 6px;
+}
+
+.excel-import-btn {
+  background: #10b981;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 4px;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.excel-import-btn:hover {
+  background: #059669;
+}
+
+.excel-icon {
+  font-size: 1rem;
+}
+
+.import-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.import-status.success {
+  color: #059669;
+}
+
+.import-status.error {
+  color: #ef4444;
 }
 
 .field-group {

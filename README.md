@@ -133,12 +133,12 @@ MiroFish-main/
 
 ## Analisi Business Plan
 
-MiroFish include una sezione dedicata all'**Analisi Business Plan**, accessibile dalla home page sotto i Quick Test. Permette di simulare scenari realistici intorno a un piano d'impresa tramite un wizard strutturato.
+MiroFish include una sezione dedicata all'**Analisi Business Plan**, accessibile dalla home page sotto i Quick Test. Permette di simulare scenari realistici intorno a un piano d'impresa tramite un wizard strutturato in due step.
 
 ### Come funziona
 
 1. Seleziona uno dei 4 template Business Plan dalla home page
-2. **Step 1 — Profilo Aziendale**: compila i campi strutturati:
+2. **Step 1 — Profilo Aziendale**: compila i campi strutturati (oppure importa direttamente da un file Excel):
    - Settore, fase aziendale (Startup / Crescita / Matura / Exit)
    - Mercato target, budget stimato, principali competitor
    - KPI prioritari (Fatturato, Quota Mercato, Retention, CAC, NPS, EBITDA)
@@ -148,6 +148,54 @@ MiroFish include una sezione dedicata all'**Analisi Business Plan**, accessibile
 3. **Step 2 — Scenario**: revisiona e personalizza il prompt di simulazione auto-generato, allega documenti opzionali (PDF, MD, TXT)
 4. La pipeline completa (grafo → simulazione → report) viene eseguita con il contesto del business plan
 5. Il Report Agent genera sezioni focalizzate su: reazioni degli stakeholder, impatto sui KPI, valutazione dei rischi, raccomandazioni strategiche
+
+### Import da Excel (.xlsx)
+
+Il wizard supporta l'importazione diretta da file Excel strutturato. Il file può contenere fino a **5 fogli**:
+
+| Foglio | Colonne | Descrizione |
+|---|---|---|
+| `Company Profile` | Campo \| Valore | Campi del profilo aziendale (company_name, sector, phase, competitors, kpis, ecc.) |
+| `Financial Data` | Indicatore \| Valore \| Unità | Dati finanziari chiave (ricavi, EBITDA, margine operativo, ecc.) |
+| `People & Roles` | Name \| Role \| Group \| Organization \| Notes | Stakeholder nominali con ruolo e organizzazione di appartenenza |
+| `Competitor Brands` | Brand \| Positioning \| PriceBand \| CoreMarkets \| Notes | Profili dettagliati dei competitor |
+| `Node Relationships` | Source \| SourceType \| Relationship \| Target \| TargetType \| Description | **Relazioni esplicite tra nodi del grafo** |
+
+#### Il foglio Node Relationships — il cuore del grafo
+
+Il foglio `Node Relationships` è il componente più importante per la qualità dell'analisi. Definisce le **relazioni esplicite tra gli attori** del piano aziendale: queste vengono incorporate nel testo del seed file che Zep Cloud elabora per costruire il grafo di conoscenza, permettendo di estrarre edge semantici precisi invece di affidarsi solo all'inferenza automatica.
+
+**Formato delle righe:**
+
+```
+Source          | SourceType   | Relationship    | Target              | TargetType   | Description
+Mario Rossi     | Customer     | BUYS_FROM       | Barilla             | Company      | Mario Rossi, Head of Procurement...
+Barilla         | Company      | COMPETES_WITH   | De Cecco            | Company      | Barilla compete direttamente con...
+Paolo Verdi     | Journalist   | COVERS          | Barilla             | Company      | Paolo Verdi copre la strategia ESG...
+Elena Neri      | Investor     | EVALUATES       | Barilla             | Company      | Elena Neri monitora la crescita EBITDA...
+Luca Moretti    | Supplier     | SUPPLIES_TO     | Barilla             | Company      | Luca Moretti fornisce grano duro a...
+```
+
+**Tipi di relazione supportati** (esempi):
+- `BUYS_FROM` — clienti B2B/B2C verso l'azienda
+- `COVERS` — giornalisti e media verso l'azienda
+- `EVALUATES` — investitori verso l'azienda
+- `SUPPLIES_TO` — fornitori verso l'azienda
+- `DISTRIBUTES_FOR` — distributori verso l'azienda
+- `COMPETES_WITH` — competitor verso l'azienda (e viceversa)
+- `WORKS_FOR` — persone verso le rispettive organizzazioni
+
+**Come funziona tecnicamente**: al momento del lancio, il wizard costruisce un `seed file .txt` che include il prefisso del template (contesto aziendale, stakeholder, scenari) più il testo della simulazione. Se il foglio `Node Relationships` è presente nell'Excel importato, le relazioni vengono convertite in frasi narrative e **aggiunte in coda al seed file** nella sezione `KEY ACTOR RELATIONSHIPS`. Zep Cloud elabora questo testo e popola automaticamente il grafo con nodi ed edge corrispondenti agli attori reali e alle loro relazioni.
+
+#### File demo incluso
+
+Il repository include un file Excel di esempio precompilato:
+
+```
+frontend/public/demo/barilla_business_plan.xlsx
+```
+
+Questo file modella un caso reale — **Barilla S.p.A.** — con 25 relazioni predefinite tra azienda, competitor, clienti B2B/B2C, fornitori, distributori, media e investitori. Può essere usato direttamente come template di riferimento per creare file personalizzati.
 
 ### Template disponibili
 

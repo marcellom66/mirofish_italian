@@ -72,12 +72,12 @@ Click the image to watch MiroFish's deep prediction of the lost ending based on 
 
 ## 📊 Business Plan Analysis
 
-MiroFish includes a dedicated **Business Plan Analysis** section on the home page, alongside the Quick Test templates. It enables structured scenario simulation for business plans through a guided wizard.
+MiroFish includes a dedicated **Business Plan Analysis** section on the home page, alongside the Quick Test templates. It enables structured scenario simulation for business plans through a guided two-step wizard.
 
 ### How It Works
 
 1. Select one of the 4 Business Plan templates from the home page
-2. **Step 1 — Company Profile**: fill in structured fields:
+2. **Step 1 — Company Profile**: fill in structured fields (or import directly from an Excel file):
    - Sector, business phase (Startup / Growth / Mature / Exit)
    - Target market, estimated budget, main competitors
    - Priority KPIs (Revenue, Market Share, Retention, CAC, NPS, EBITDA)
@@ -87,6 +87,54 @@ MiroFish includes a dedicated **Business Plan Analysis** section on the home pag
 3. **Step 2 — Scenario**: review and edit the auto-generated simulation prompt, optionally attach documents (PDF, MD, TXT)
 4. The full pipeline (graph → simulation → report) runs with your business plan context
 5. The Report Agent generates sections focused on: stakeholder reactions, KPI impact, risk evaluation, strategic recommendations
+
+### Excel Import (.xlsx)
+
+The wizard supports direct import from a structured Excel file. The file can contain up to **5 sheets**:
+
+| Sheet | Columns | Description |
+|---|---|---|
+| `Company Profile` | Campo \| Valore | Company profile fields (company_name, sector, phase, competitors, kpis, etc.) |
+| `Financial Data` | Indicatore \| Valore \| Unità | Key financial data (revenue, EBITDA, operating margin, etc.) |
+| `People & Roles` | Name \| Role \| Group \| Organization \| Notes | Named stakeholders with role and organization |
+| `Competitor Brands` | Brand \| Positioning \| PriceBand \| CoreMarkets \| Notes | Detailed competitor profiles |
+| `Node Relationships` | Source \| SourceType \| Relationship \| Target \| TargetType \| Description | **Explicit graph node relationships** |
+
+#### The Node Relationships Sheet — the heart of the knowledge graph
+
+The `Node Relationships` sheet is the most important component for analysis quality. It defines **explicit relationships between actors** in the business plan. These are embedded into the seed file text that Zep Cloud processes to build the knowledge graph, allowing precise semantic edges to be extracted rather than relying solely on automatic inference.
+
+**Row format:**
+
+```
+Source          | SourceType   | Relationship    | Target              | TargetType   | Description
+Mario Rossi     | Customer     | BUYS_FROM       | Barilla             | Company      | Mario Rossi, Head of Procurement...
+Barilla         | Company      | COMPETES_WITH   | De Cecco            | Company      | Barilla directly competes with...
+Paolo Verdi     | Journalist   | COVERS          | Barilla             | Company      | Paolo Verdi covers Barilla's ESG strategy...
+Elena Neri      | Investor     | EVALUATES       | Barilla             | Company      | Elena Neri monitors Barilla's EBITDA growth...
+Luca Moretti    | Supplier     | SUPPLIES_TO     | Barilla             | Company      | Luca Moretti supplies durum wheat to...
+```
+
+**Supported relationship types** (examples):
+- `BUYS_FROM` — B2B/B2C customers toward the company
+- `COVERS` — journalists and media toward the company
+- `EVALUATES` — investors toward the company
+- `SUPPLIES_TO` — suppliers toward the company
+- `DISTRIBUTES_FOR` — distributors toward the company
+- `COMPETES_WITH` — competitors toward the company (and vice versa)
+- `WORKS_FOR` — people toward their respective organizations
+
+**How it works technically**: at launch time, the wizard builds a `.txt` seed file containing the template prefix (company context, stakeholders, scenarios) plus the scenario text. If the `Node Relationships` sheet is present in the imported Excel, the relationships are converted into narrative sentences and **appended to the seed file** under a `KEY ACTOR RELATIONSHIPS` section. Zep Cloud processes this text and automatically populates the graph with nodes and edges corresponding to real actors and their relationships.
+
+#### Included demo file
+
+The repository includes a pre-filled sample Excel file:
+
+```
+frontend/public/demo/barilla_business_plan.xlsx
+```
+
+This file models a real-world case — **Barilla S.p.A.** — with 25 predefined relationships between the company, competitors, B2B/B2C customers, suppliers, distributors, media, and investors. It can be used directly as a reference template for creating custom files.
 
 ### Available Templates
 
